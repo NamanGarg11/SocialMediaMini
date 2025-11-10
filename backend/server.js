@@ -8,7 +8,7 @@ const postRoutes = require("./routes/postRoutes");
 const cors = require("cors");
 
 app.use(cors({
-  origin: "http://localhost:5173", // or your frontend URL
+  origin: "https://socialmedia-11.netlify.app/", // or your frontend URL
   credentials: true
 }));
 
