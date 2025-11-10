@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://socialmediamini-1.onrender.com/api", // your backend URL
+  baseURL: "https://socialmediamini-1.onrender.com/api",
+  withCredentials: true, // your backend URL
 });
 
 axiosInstance.interceptors.request.use((config) => {
