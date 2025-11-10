@@ -136,10 +136,34 @@ const addComment = async (req, res) => {
   }
 };
 
+// 📜 Get all comments for a post
+ const getComments = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const post = await Post.findById(postId, "comments").lean();
+
+    if (!post) return res.status(404).json({ message: "Post not found" });
+
+    const comments = post.comments
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .map((c) => ({
+        username: c.username,
+        text: c.text,
+        createdAt: c.createdAt,
+      }));
+
+    res.status(200).json({ comments });
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 module.exports = {
   createPost,
   getFeed,
   toggleLike,
   addComment,
+  getComments
 };
 
