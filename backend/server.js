@@ -7,13 +7,21 @@ const cookieParser = require("cookie-parser");
 const postRoutes = require("./routes/postRoutes");
 const cors = require("cors");
 
+const allowedOrigins = [
+  "https://socialmedia-11.netlify.app", // ✅ your deployed frontend
+  "http://localhost:5173" // ✅ for local dev
+];
+
 app.use(cors({
-  origin: true,
-  // origin: [
-  //   "https://socialmedia-11.netlify.app",
-  //   "http://localhost:5173" // keep for local testing
-  // ], // or your frontend URL
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log("Blocked by CORS:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
 
 app.use(express.json());
