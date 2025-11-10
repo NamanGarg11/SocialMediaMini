@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -48,7 +48,7 @@ const Register = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:3000/api/users/register",
+        "/users/register",
         form
       );
       alert("Registration successful!");

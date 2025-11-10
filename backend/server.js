@@ -9,7 +9,7 @@ const cors = require("cors");
 
 app.use(cors({
   origin: [
-    "https://socialmedia-11.netlify.app/",
+    "https://socialmedia-11.netlify.app",
     "http://localhost:5173" // keep for local testing
   ], // or your frontend URL
   credentials: true
